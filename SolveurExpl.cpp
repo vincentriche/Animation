@@ -51,8 +51,7 @@ void SolveurExpl::CalculAccel_ForceGravite(Vector g,
 {
 	for (int i = 0; i < Force.size(); i++)
 	{
-		Vector wind(0.0, -2.0, -3.0);
-
+		Vector wind(0.0, -2.5, -4.0);
 		Force[i] = Force[i] + M[i] * g + wind;
 
 		if (M[i] > 0.0f)
@@ -75,15 +74,15 @@ void SolveurExpl::Solve(float visco,
 	std::vector<Vector> &V,
 	std::vector<Vector> &P)
 {
-	float delta = _delta_t * 2;
+	float delta = _delta_t;
 
 	// Euler Explicite
 	/*
-	for (int i = 0; i < nb_som; i++)
-	{
-	P[i] = P[i] + delta * V[i];
-	V[i] = V[i] + delta * A[i];
-	}
+		for (int i = 0; i < nb_som; i++)
+		{
+			P[i] = P[i] + delta * V[i];
+			V[i] = V[i] + delta * A[i];
+		}
 	*/
 
 	// Euler Semi-Explicite

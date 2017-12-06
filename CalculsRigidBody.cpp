@@ -44,13 +44,13 @@ using namespace std;
  */
 void ObjetSimuleRigidBody::CalculMasse()
 {
-	/*_Mass = 0.0;
+	_Mass = 0.0;
 	for (int i = 0; i < M.size(); i++)
 	{
 		_Mass += M[i];
 		_BaryCentre = _BaryCentre + M[i] * P[i];
 	}
-	_BaryCentre = _BaryCentre / _Mass;*/
+	_BaryCentre = _BaryCentre / _Mass;
 }
 
 /*

@@ -54,7 +54,6 @@ Matrix Matrix::NullMatrix()
     return result;
 }
 
-
 /*
  * Creation d une matrice unitaire (1 sur la diagonale, 0 sinon).
  */
@@ -68,7 +67,6 @@ Matrix Matrix::UnitMatrix()
     
     return result;
 }
-
 
 /*
  * Matrice de rotation.
@@ -115,7 +113,6 @@ Matrix Matrix::AngleVectorToMatrix(Vector axe, float angle_degres)
 
 }
 
-
 /*
  * Surcharge de l operateur =.
  */
@@ -129,7 +126,6 @@ Matrix & Matrix::operator=(const Matrix & matrix)
     return *this;
 }
 
-
 /*
  * Surcharge de l operateur *=.
  */
@@ -141,7 +137,6 @@ Matrix & Matrix::operator*= (float factor)
     
     return *this;
 }
-
 
 /*
  * Surcharge operateur *=.
@@ -167,7 +162,6 @@ Matrix & Matrix::operator*= (const Matrix & matrix)
     return *this;
 }
 
-
 /*
  * Surcharge de l operateur +=.
  */
@@ -180,8 +174,7 @@ Matrix & Matrix::operator*= (const Matrix & matrix)
     
     return *this;
 }
-
-
+ 
 /*
  * Surcharge de l operateur -=.
  */
@@ -194,7 +187,6 @@ Matrix & Matrix::operator-= (const Matrix & matrix)
     return *this;
 }
 
-
 /*
  * Renvoie la valeur d une matrice selon l indice donne.
  */
@@ -202,7 +194,6 @@ inline float & Matrix::operator()(unsigned index)
 {
     return m_Values[index];
 }
-
 
 /*
  * Renvoie la valeur d une matrice selon l indice de ligne et de colonne donnes.
@@ -212,7 +203,6 @@ inline float & Matrix::operator()(unsigned row, unsigned column)
     return m_Values[row * 3 + column];
 }
 
-
 /*
  * Renvoie la valeur d une matrice selon l indice donne.
  */
@@ -220,7 +210,6 @@ float Matrix::operator()(unsigned index) const
 {
     return m_Values[index];
 }
-
 
 /*
  * Renvoie la valeur d une matrice selon l indice de ligne et de colonne donnes.
@@ -230,7 +219,6 @@ float Matrix::operator()(unsigned row, unsigned column) const
     return m_Values[row * 3 + column];
 }
 
-
 /*
  * Renvoie le vecteur ligne de la matrice selon l indice de ligne donne.
  */
@@ -238,7 +226,6 @@ Vector Matrix::GetAxis(unsigned int row) const
 {
     return Vector(m_Values[row * 3 + 0], m_Values[row * 3 + 1], m_Values[row * 3 + 2]);
 }
-
 
 /*
  * Renvoi le determinant de la matrice.
@@ -248,7 +235,6 @@ float Matrix::Determinant() const
     return m_Values[0] * m_Values[4] * m_Values[8] + m_Values[1] * m_Values[5] * m_Values[6] + m_Values[2] * m_Values[3] * m_Values[7]
     -  m_Values[2] * m_Values[4] * m_Values[6] - m_Values[0] * m_Values[5] * m_Values[7] - m_Values[1] * m_Values[3] * m_Values[8];
 }
-
 
 /*
  * Calcul de la matrice inverse.
@@ -278,7 +264,6 @@ void Matrix::Inverse()
     }
 }
 
-
 /*
  * Renvoi la matrice inverse.
  */
@@ -288,7 +273,6 @@ Matrix Matrix::InverseConst() const
     result.Inverse();
     return result;
 }
-
 
 /*
  * Calcul de la matrice transposee.
@@ -301,7 +285,6 @@ void Matrix::Transpose()
     m_Values[3] = backUp(1); m_Values[4] = backUp(4); m_Values[5] = backUp(7);
     m_Values[6] = backUp(2); m_Values[7] = backUp(5); m_Values[8] = backUp(8);
 }
-
 
 /*
  * Renvoi la matrice transposee.
@@ -316,7 +299,6 @@ Matrix Matrix::TransposeConst() const
     
     return result;
 }
-
 
 /********************************************************/
 /* Fonctions effectuant des operations sur des matrices */
@@ -333,7 +315,6 @@ Matrix operator* (const Matrix & matrix, float factor)
     
     return result;
 }
-
 
 /*
  * Renvoi la multiplication de deux matrices.
@@ -357,7 +338,6 @@ Matrix operator* (const Matrix & matrixA, const Matrix & matrixB)
     return result;
 }
 
-
 /*
  * Renvoi la multiplication d une matrice par un vecteur.
  */
@@ -372,7 +352,6 @@ Vector operator* (const Matrix & matrix, const Vector & coord)
     return result;
 }
 
-
 /*
  * Calcul de la somme de deux matrices.
  */
@@ -383,7 +362,6 @@ Matrix operator+ (const Matrix & matrixA, const Matrix & matrixB)
     
     return result;
 }
-
 
 /*
  * Renvoi la multiplication d une vecteur par une matrice.
@@ -407,7 +385,6 @@ Matrix operator* (const Vector & coord, const Matrix & matrix)
     return result;
 }
 
-
 /*
  * Calcul de la soustraction de deux matrices.
  */
@@ -417,7 +394,6 @@ Matrix operator- (const Matrix & matrixA, const Matrix & matrixB)
     result -= matrixB;
     return result;
 }
-
 
 /*
  * Retourne le matrice (vecteur *).
@@ -441,7 +417,6 @@ Matrix StarMatrix(const Vector & vector)
     
     return (matrix);
 }
-
 
 /*
  * Renvoie la matrice transposee.
