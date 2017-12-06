@@ -221,7 +221,7 @@ int Viewer::render()
 		// Affichage de la pshère ou se produisent les collisions
 		gl.model(Identity());
 		gl.texture(m_sphere_texture);
-		gl.model(T * Translation(1.05, -2.34, -0.3) * Scale(0.28, 0.28, 0.28));
+		gl.model(T * Translation(1.05, -2.4, -0.3) * Scale(0.28, 0.28, 0.28));
 		gl.draw(m_sphere);
 
 		// Passage a l objet suivant
