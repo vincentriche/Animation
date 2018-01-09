@@ -64,6 +64,7 @@ public:
     
     /*! Gestion des collisions. Rajoutez parametre si besoin. */
     void CollisionPlan();
+	void CollisionPlan(float x, float y, float z);
     
     /*! Creation du maillage (pour l affichage) de l objet simule de type RigidBody */
     void initMeshObjet();

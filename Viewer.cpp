@@ -204,7 +204,7 @@ int Viewer::render()
 
 			// Transformation geometrique appliquee a l objet
 			gl.model(Identity());
-			gl.model((Translation(Vector(-2.0, -1.6, 0.0)) * T) * Scale(2.0, 2.0, 2.0));
+			gl.model((Translation(Vector(-2.0, 0.0, 0.0)) * T) * Scale(2.0, 2.0, 2.0));
 
 			// Affichage du Mesh de l objet du graphe de scene
 			glFrontFace(GL_CW);
@@ -221,7 +221,7 @@ int Viewer::render()
 		// Affichage de la pshère ou se produisent les collisions
 		gl.model(Identity());
 		gl.texture(m_sphere_texture);
-		gl.model(T * Translation(1.05, -2.4, -0.3) * Scale(0.28, 0.28, 0.28));
+		gl.model(T * Translation(1.05, -2.4, -0.28) * Scale(0.28, 0.28, 0.28));
 		gl.draw(m_sphere);
 
 		// Passage a l objet suivant

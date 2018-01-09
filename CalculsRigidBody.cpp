@@ -45,10 +45,10 @@ using namespace std;
 void ObjetSimuleRigidBody::CalculMasse()
 {
 	_Mass = 0.0;
-	for (int i = 0; i < M.size(); i++)
+	for (int i = 0; i < P.size(); i++)
 	{
 		_Mass += M[i];
-		_BaryCentre = _BaryCentre + M[i] * P[i];
+		_BaryCentre = _BaryCentre + P[i] * M[i];
 	}
 	_BaryCentre = _BaryCentre / _Mass;
 }
@@ -59,7 +59,17 @@ void ObjetSimuleRigidBody::CalculMasse()
  */
 void ObjetSimuleRigidBody::CalculIBody()
 {
+	_Ibody = Matrix::NullMatrix();
+	for (int i = 0; i < P.size(); i++)
+	{
+		_ROi.push_back(P[i]);
 
+		float r0iTr0i = (_ROi[i].x * _ROi[i].x + _ROi[i].y * _ROi[i].y + _ROi[i].z * _ROi[i].z);
+		Matrix r0ir0iT = MultiplyTransposedAndOriginal(_ROi[i]);
+		_Ibody = (Matrix::UnitMatrix() * r0iTr0i - r0ir0iT) * M[i];
+	}
+
+	_IbodyInv = _Ibody.InverseConst();
 }
 
 /*
@@ -67,8 +77,8 @@ void ObjetSimuleRigidBody::CalculIBody()
  */
 void ObjetSimuleRigidBody::CalculStateX()
 {
-
-
+	_InertieTenseurInv = _Rotation * _IbodyInv * _Rotation.TransposeConst();
+	_VitesseAngulaire = _InertieTenseurInv * _MomentCinetique;
 }
 
 /*
@@ -76,7 +86,12 @@ void ObjetSimuleRigidBody::CalculStateX()
  */
 void ObjetSimuleRigidBody::CalculDeriveeStateX(Vector gravite)
 {
+	_Vitesse = _QuantiteMouvement / _Mass;
+	_RotationDerivee = (_VitesseAngulaire.x == 0.0 && _VitesseAngulaire.y == 0.0 && _VitesseAngulaire.z == 0.0) ? Matrix::NullMatrix() : StarMatrix(_VitesseAngulaire) * _Rotation;
+	_Force = gravite * _Mass;
 
+	for (int i = 0; i < _Nb_Sommets; i++)
+		_Torque = _Torque + cross(P[i] - _BaryCentre, F[i]);
 }
 
 /**
@@ -84,17 +99,37 @@ void ObjetSimuleRigidBody::CalculDeriveeStateX(Vector gravite)
  */
 void ObjetSimuleRigidBody::Solve(float visco)
 {
+	_Position = _Position + _Vitesse * _delta_t;
+	_Rotation = _Rotation + _RotationDerivee * _delta_t;
+	_QuantiteMouvement = _QuantiteMouvement + _Force * _delta_t;
+	_MomentCinetique = _MomentCinetique + _Torque * _delta_t;
 
+	for (int i = 0; i < _Nb_Sommets; i++)
+		P[i] = _Rotation * _ROi[i] + _Position * visco;
 
 }//void
+
+
+void ObjetSimuleRigidBody::CollisionPlan()
+{
+
+}
 
 /**
  * Gestion des collisions avec le sol.
  */
-void ObjetSimuleRigidBody::CollisionPlan()
+void ObjetSimuleRigidBody::CollisionPlan(float x, float y, float z)
 {
+	for (int i = 0; i < V.size(); i++)
+	{
+		if (P[i].y <= y && _QuantiteMouvement.y < 0.0)
+		{
+			_QuantiteMouvement = -_QuantiteMouvement * 0.5f;
 
+			if (_MomentCinetique.x < 0.01 || _MomentCinetique.y < 0.01 || _MomentCinetique.z < 0.01)
+				_MomentCinetique = Vector(0.0, 0.0, 0.0);
 
-
+			_MomentCinetique = -_MomentCinetique * 0.2f;
+		}
+	}
 }// void
-
