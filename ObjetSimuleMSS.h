@@ -32,6 +32,7 @@ class ObjetSimuleMSS: public ObjetSimule
 {
 public:
     
+	std::string type = "MSS";
     /*! Constructeur */
     ObjetSimuleMSS(std::string fich_param);
     

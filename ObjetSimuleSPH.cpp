@@ -160,7 +160,7 @@ void ObjetSimuleSPH::Simulation(Vector gravite, float viscosite, int Tps)
     
     /* Calcul des accelerations (avec ajout de la gravite aux forces) */
     //std::cout << "Accel.... " << std::endl;
-    _SolveurExpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M);
+    _SolveurExpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M, type);
     
     /* Calcul des vitesses et positions au temps t */
     //std::cout << "Vit.... " << std::endl;

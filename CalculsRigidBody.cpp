@@ -129,7 +129,7 @@ void ObjetSimuleRigidBody::CollisionPlan(float x, float y, float z)
 			if (_MomentCinetique.x < 0.01 || _MomentCinetique.y < 0.01 || _MomentCinetique.z < 0.01)
 				_MomentCinetique = Vector(0.0, 0.0, 0.0);
 
-			_MomentCinetique = -_MomentCinetique * 0.2f;
+			_MomentCinetique = -_MomentCinetique * 0.5f;
 		}
 	}
 }// void

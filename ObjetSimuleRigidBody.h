@@ -33,7 +33,9 @@
 class ObjetSimuleRigidBody: public ObjetSimuleMSS
 {
 public:
-    
+
+	std::string type = "Particule";
+
     /*! Constructeur */
     ObjetSimuleRigidBody(std::string fich_param);
     

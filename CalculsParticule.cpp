@@ -45,9 +45,18 @@ using namespace std;
  */
 void ObjetSimuleParticule::CollisionPlan(float x, float y, float z)
 {
-
-	// Collision juste par rapport au plan horizontal passant par le y
-
-
+	float s = 0.08;
+	for (int i = 0; i < V.size(); i++)
+	{
+		if (P[i].y <= (y + s) && length(V[i]) > 1.0)
+		{
+			V[i] = Vector(0, -V[i].y, 0);
+		}
+		else if (P[i].y <= (y + s))
+		{
+			P[i] = Vector(P[i].x, y + s, P[i].z);
+			V[i] = Vector(0, 0, 0);
+		}
+	}
 }
 

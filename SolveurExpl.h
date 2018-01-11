@@ -34,30 +34,31 @@
 class SolveurExpl
 {
 public:
-    
-    /*! Constructeur */
-    SolveurExpl(){}
-    
-    /*! Calcul des accelerations (avec ajout de la gravite aux forces) */
-    void CalculAccel_ForceGravite(Vector g,
-                                  int nb_som,
-                                  std::vector<Vector> &A,
-                                  std::vector<Vector> &Force,
-                                  std::vector<float> &M);
-    
-    
-    /*! Calcul des vitesses et positions */
-    void Solve(float visco,
-               int nb_som,
-               int Tps,
-               std::vector<Vector> &A,
-               std::vector<Vector> &V,
-               std::vector<Vector> &P);
-    
-    
-    
-    /// Pas de temps
-    float _delta_t;
+
+	/*! Constructeur */
+	SolveurExpl() {}
+
+	/*! Calcul des accelerations (avec ajout de la gravite aux forces) */
+	void CalculAccel_ForceGravite(Vector g,
+		int nb_som,
+		std::vector<Vector> &A,
+		std::vector<Vector> &Force,
+		std::vector<float> &M,
+		std::string type);
+
+
+	/*! Calcul des vitesses et positions */
+	void Solve(float visco,
+		int nb_som,
+		int Tps,
+		std::vector<Vector> &A,
+		std::vector<Vector> &V,
+		std::vector<Vector> &P);
+
+
+
+	/// Pas de temps
+	float _delta_t;
 };
 
 

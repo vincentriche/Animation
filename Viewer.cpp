@@ -150,7 +150,7 @@ int Viewer::render()
 
 	/* Affichage des objets */
 	Transform T;
-	T = Translation(0, 3, 0);
+	T = Translation(0, 3.0, 0);
 
 	ListeNoeuds::iterator e;
 	int num = 0;
@@ -187,7 +187,7 @@ int Viewer::render()
 			for (int i = 0; i < (*e)->_Nb_Sommets; i++)
 			{
 				// Positionnement en fonction de la position de la particule
-				gl.model(Translation(Vector((*e)->P[i])));
+				gl.model(Translation(Vector((*e)->P[i])) * Scale(0.06, 0.06, 0.06));
 
 				// Affichage d une sphere pour modeliser une particule
 				gl.draw(m_sphere);
@@ -215,13 +215,14 @@ int Viewer::render()
 
 		 // Affichage du plan ou se produisent les collisions
 		gl.model(Identity());
-		gl.model(T * Translation(0.0, -2.7, 0.0) * Scale(3.0, 3.0, 3.0));
+		gl.texture(m_plan_texture);
+		gl.model(T * Translation(0.0, -3.0, 0.0) * Scale(5.0, 5.0, 5.0));
 		gl.draw(m_plan);
 
 		// Affichage de la pshère ou se produisent les collisions
 		gl.model(Identity());
 		gl.texture(m_sphere_texture);
-		gl.model(T * Translation(1.05, -2.4, -0.28) * Scale(0.28, 0.28, 0.28));
+		gl.model(T * Translation(1.05, -2.67, -0.28) * Scale(0.28, 0.28, 0.28));
 		gl.draw(m_sphere);
 
 		// Passage a l objet suivant

@@ -230,6 +230,7 @@ int Viewer::init()
 	m_tissu_texture = read_texture(0, smart_path("data/textures/tissu2.jpg"));
 
 	m_sphere_texture = read_texture(0, smart_path("data/textures/ball.png"));
+	m_plan_texture = read_texture(0, smart_path("data/textures/ground.png"));
 
 	// Appel des procedures d initialisation des objets de la scene
 	// Pour les objets non simules

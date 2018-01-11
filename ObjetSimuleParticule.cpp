@@ -173,7 +173,7 @@ void ObjetSimuleParticule::Simulation(Vector gravite, float viscosite, int Tps)
 {
     /* Calcul des accelerations (avec ajout de la gravite aux forces) */
     //std::cout << "Accel.... " << std::endl;
-    _SolveurExpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M);
+    _SolveurExpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M, type);
     
     /* Calcul des vitesses et positions au temps t */
     //std::cout << "Vit.... " << std::endl;
@@ -182,7 +182,7 @@ void ObjetSimuleParticule::Simulation(Vector gravite, float viscosite, int Tps)
     /* ! Gestion des collisions avec sol et bords de la fenetre */
     // Reponse : rebond
     // Penser au Translate de l objet dans la scene pour trouver plan coherent
-    //CollisionPlan();
+	CollisionPlan(-10.0, 0.0, -10.0);
     
     // Affichage des positions
     // AffichagePos(Tps);

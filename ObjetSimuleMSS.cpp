@@ -440,7 +440,7 @@ void ObjetSimuleMSS::Simulation(Vector gravite, float viscosite, int Tps)
 	/* Calcul des accelerations (avec ajout de la gravite aux forces) */
 	//std::cout << "Accel.... " << std::endl;
 	if (_Integration == "explicite")
-		_SolveurExpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M);
+		_SolveurExpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M, type);
 	else if (_Integration == "implicite")
 		_SolveurImpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M);
 
@@ -454,10 +454,10 @@ void ObjetSimuleMSS::Simulation(Vector gravite, float viscosite, int Tps)
 	/* ! Gestion des collisions avec plan (x,y,z)  */
 	// Reponse : reste a la position du plan - arret des vitesses
 	// Penser au Translate de l objet dans la scene pour trouver plan coherent
-	CollisionPlan(-10.0, -9.0, -10.0);
+	CollisionPlan(-10.0, -10.0, -10.0);
 
 	// Collision avec une sphère
-	CollisionSphere(Point(3.5, -8.0, -1.0), 1.1);
+	CollisionSphere(Point(3.5, -9.0, -1.0), 1.1);
 
 	// Affichage des positions
 	//  AffichagePos(Tps);

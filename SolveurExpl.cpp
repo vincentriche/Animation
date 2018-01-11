@@ -47,12 +47,17 @@ void SolveurExpl::CalculAccel_ForceGravite(Vector g,
 	int nb_som,
 	std::vector<Vector> &A,
 	std::vector<Vector> &Force,
-	std::vector<float> &M)
+	std::vector<float> &M, std::string type)
 {
 	for (int i = 0; i < Force.size(); i++)
 	{
-		Vector wind(0.0, -2.5, -4.0);
-		Force[i] = Force[i] + M[i] * g + wind;
+		if (type == "MSS")
+		{
+			Vector wind(0.0, -2.5, -4.0);
+			Force[i] = Force[i] + M[i] * g + wind;
+		}
+		if(type == "PARTICULE")
+			Force[i] = Force[i] + M[i] * g;
 
 		if (M[i] > 0.0f)
 			A[i] = Force[i] / M[i];

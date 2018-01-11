@@ -99,6 +99,7 @@ protected:
 	/// Declaration de la texture pour le tissu
 	GLuint m_tissu_texture;
 	GLuint m_sphere_texture;
+	GLuint m_plan_texture;
 
 	// Concerne uniquement les objets qui ne sont pas soumis a la simulation mecanique
 	// Declaration des procedures d initialisation des objets de la scene

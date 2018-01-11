@@ -8,7 +8,7 @@
 
 
 
-/** Librairies de base **/
+ /** Librairies de base **/
 #include <stdio.h>
 #include <vector>
 #include <string.h>
@@ -28,33 +28,34 @@
 /**
  * \brief Structure de donnees pour un ensemble de particules.
  */
-class ObjetSimuleParticule: public ObjetSimule
+class ObjetSimuleParticule : public ObjetSimule
 {
 public:
-    
-    /*! Constructeur */
-    ObjetSimuleParticule(std::string fich_param);
-    
-    /*  Lecture des parametres de l execution relatfs au systeme de particules */
-    void Param_particule(std::string Fichier_Param);
-    
-    /*! Initialisation a partir des fichiers de donnees.*/
-    void initObjetSimule();
-    
-    /*! Creation du maillage (pour affichage) de l objet simule */
-    void initMeshObjet();
-    
-    /*! Simulation de l objet */
-    void Simulation(Vector gravite, float viscosite, int Tps);
-  
-    /*! Gestion des collisions */
+
+	std::string type = "PARTICULE";
+	/*! Constructeur */
+	ObjetSimuleParticule(std::string fich_param);
+
+	/*  Lecture des parametres de l execution relatfs au systeme de particules */
+	void Param_particule(std::string Fichier_Param);
+
+	/*! Initialisation a partir des fichiers de donnees.*/
+	void initObjetSimule();
+
+	/*! Creation du maillage (pour affichage) de l objet simule */
+	void initMeshObjet();
+
+	/*! Simulation de l objet */
+	void Simulation(Vector gravite, float viscosite, int Tps);
+
+	/*! Gestion des collisions */
 	void CollisionPlan(float x, float y, float z);
-    
-    /*! Mise a jour du Mesh (pour affichage) de l objet en fonction des nouvelles positions calculees */
-    void updateVertex();
-    
-    /// SolveurExpl : schema d integration semi-implicite 
-    SolveurExpl *_SolveurExpl;
+
+	/*! Mise a jour du Mesh (pour affichage) de l objet en fonction des nouvelles positions calculees */
+	void updateVertex();
+
+	/// SolveurExpl : schema d integration semi-implicite 
+	SolveurExpl *_SolveurExpl;
 };
 
 
