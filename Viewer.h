@@ -91,6 +91,7 @@ protected:
 	Mesh m_cube;
 	Mesh m_plan;
 	Mesh m_sphere;
+	Mesh m_sphere2;
 
 	// Declaration des textures
 	// Exemple : GLuint m_votreObjet_texture;

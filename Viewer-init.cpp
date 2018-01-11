@@ -89,7 +89,7 @@ void Viewer::init_plan(float x, float y, float z)
 	m_plan.vertex(size + x, y, -size + z);
 	m_plan.vertex(size + x, y, size + z);
 	m_plan.vertex(-size + x, y, size + z);
-}	
+}
 
 /*
  * Creation du maillage d un cube.
@@ -154,7 +154,7 @@ void Viewer::init_sphere()
 
 	m_sphere = Mesh(GL_TRIANGLE_STRIP);
 
-	m_sphere.color(Color(0, 0, 1));
+	m_sphere.color(Color(114 / 255, 95 / 255, 106 / 255));
 
 	for (i = 0; i < divAlpha; ++i)
 	{
@@ -238,8 +238,9 @@ int Viewer::init()
 	init_axe();
 	init_grid();
 	init_cube();
+	init_sphere();
 	m_plan = read_mesh("data/plan.obj");
-	m_sphere = read_mesh("data/ball.obj");
+	m_sphere2 = read_mesh("data/ball.obj");
 
 	// Creation du plan (x, y, z) - plan utilise pour les ObjetSimule::CollisionPlan(x, y, z);
 	// Rq : pas vraiment le plan, mais < x, < y, < z

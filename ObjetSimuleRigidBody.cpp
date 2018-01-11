@@ -101,8 +101,7 @@ void ObjetSimuleRigidBody::initMeshObjet()
 	std::cout << "Maillage du RigidBody pour affichage build ..." << std::endl;
 	m_ObjetSimule = Mesh(GL_TRIANGLES);
 
-	//m_ObjetSimule.color(Color(0.4, 0.4, 0.0));
-	m_ObjetSimule.color(Color(0.6, 0.3, 0.0));
+	m_ObjetSimule.color(Color(0.8, 0.5, 0.2));
 
 	for (int i = 0; i < _VISize; i++)
 		m_ObjetSimule.vertex(P[_VIndices[i]].x, P[_VIndices[i]].y, P[_VIndices[i]].z);

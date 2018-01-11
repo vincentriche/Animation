@@ -187,8 +187,8 @@ int Viewer::render()
 			for (int i = 0; i < (*e)->_Nb_Sommets; i++)
 			{
 				// Positionnement en fonction de la position de la particule
-				gl.model(Translation(Vector((*e)->P[i])) * Scale(0.06, 0.06, 0.06));
-
+				gl.model(Translation(Vector((*e)->P[i])) * Scale(1.0, 1.0, 1.0));
+				
 				// Affichage d une sphere pour modeliser une particule
 				gl.draw(m_sphere);
 			}
@@ -223,7 +223,7 @@ int Viewer::render()
 		gl.model(Identity());
 		gl.texture(m_sphere_texture);
 		gl.model(T * Translation(1.05, -2.67, -0.28) * Scale(0.28, 0.28, 0.28));
-		gl.draw(m_sphere);
+		gl.draw(m_sphere2);
 
 		// Passage a l objet suivant
 		num++;
