@@ -49,7 +49,28 @@ using namespace std;
  */
 void ObjetSimuleSPH::CalculDensite()
 {
+	for (int i = 0; i < rho.size(); i++)
+	{
+		rho[i] = 0;
+	}
 
+	for (int i = 0; i < rho.size(); i++)
+	{
+		float _rho = (4 * M[i]) / (M_PI * pow(h, 8));
+
+		float sum = 0;
+		for (int j = i + 1; j < rho.size(); j++)
+		{
+			float r = distance(Point(P[i]), Point(P[j]));
+
+			float d = (h * h) - (r *r);
+			if (d > 0)
+				sum += d * d * d;
+
+			rho[i] += _rho * sum;
+			rho[j] += _rho * sum;
+		}
+	}
 
 }//void
 
@@ -59,7 +80,26 @@ void ObjetSimuleSPH::CalculDensite()
  */
 void ObjetSimuleSPH::CalculInteraction(float visco)
 {
+	for (int i = 0; i < rho.size(); i++)
+	{
+		for (int j = i + 1; j < rho.size(); j++)
+		{
+			float r = distance(Point(P[i]), Point(P[j]));
+			float d = (h * h) - (r *r);
+			if (d > 0)
+			{
+				float qij = r / h;
+				Vector rij = P[i] - P[j];
+				Vector vij = V[i] - V[j];
 
+				F[i] = (M[j] / (M_PI * pow(h, 4) * rho[j])) * (1 - qij) *
+					((15 * bulk) * (rho[i] + rho[j] - 2 * rho0) * ((1 - qij) / qij) * rij - (40 * visco * vij));
+
+				F[i] = F[i] / rho[i];
+				F[j] = -F[i];
+			}
+		}
+	}
 }//void
 
 /**
@@ -75,8 +115,18 @@ void ObjetSimuleSPH::CalculInteraction(float visco)
 void ObjetSimuleSPH::damp_reflect(int frontiere, float barrier, int indice_part)
 {
 	/// frontiere : indique quelle frontiere (x, y, z) du domaine est concernee
+	const float DAMP = 0.75;
 
 
+	float tbounce = (P[indice_part](frontiere) - barrier) / V[indice_part](frontiere);
+
+	P[indice_part].x = P[indice_part].x - (V[indice_part].x * (1 - DAMP) * tbounce);
+	P[indice_part].y = P[indice_part].y - (V[indice_part].y * (1 - DAMP) * tbounce);
+	P[indice_part].z = P[indice_part].z - (V[indice_part].z * (1 - DAMP) * tbounce);
+
+
+	P[indice_part](frontiere) = 2 * barrier - P[indice_part](frontiere);
+	V[indice_part](frontiere) = -V[indice_part](frontiere);	V[indice_part](0) = V[indice_part](0) * DAMP;	V[indice_part](1) = V[indice_part](1) * DAMP;	V[indice_part](2) = V[indice_part](2) * DAMP;
 }
 
 /**
@@ -86,7 +136,4 @@ void ObjetSimuleSPH::damp_reflect(int frontiere, float barrier, int indice_part)
  */
 void ObjetSimuleSPH::CollisionPlan(float x, float y, float z)
 {
-
-
 }
-

@@ -29,9 +29,9 @@ std:cout << "Le code s execute depuis " << _getcwd(tampon, 1000) << std::endl;
 	/// Pour ne pas a avoir a mettre les fichiers en parametres de l execution
 	if (argc == 1)
 	{
-		argc = 5; // modifie le nombre de parametre mis dans l execution
+		argc = 6; // modifie le nombre de parametre mis dans l execution
 
-		argv = new char*[5];
+		argv = new char*[6];
 
 		argv[0] = new char[256]; // Nom de l executable
 		argv[1] = new char[256]; // Nb d objet dans la simulation - NB doit etre egale a 1
@@ -39,13 +39,15 @@ std:cout << "Le code s execute depuis " << _getcwd(tampon, 1000) << std::endl;
 		argv[3] = new char[256]; // Nom du fichier de parametre de l objet 1
 		argv[4] = new char[256]; // Nom du fichier de parametre de l objet 2
 		argv[5] = new char[256]; // Nom du fichier de parametre de l objet 3
+		argv[6] = new char[256]; // Nom du fichier de parametre de l objet 4
 
 		strcpy(argv[0], "./bin/master_MecaSim_etudiant");
-		strcpy(argv[1], "3");
+		strcpy(argv[1], "4");
 		strcpy(argv[2], "./src/master_MecaSim/exec/Fichier_Param.simu");
 		strcpy(argv[3], "./src/master_MecaSim/exec/Fichier_Param.objet1");
 		strcpy(argv[4], "./src/master_MecaSim/exec/Fichier_Param.objet2");
 		strcpy(argv[5], "./src/master_MecaSim/exec/Fichier_Param.objet3");
+		strcpy(argv[6], "./src/master_MecaSim/exec/Fichier_Param.objet4");
 
 		// Equivalent a la commande :
 		//  ./bin/master_MecaSim_etudiant 1 ./src/master_MecaSim/exec/Fichier_Param.simu ./src/master_MecaSim/exec/Fichier_Param.objet1

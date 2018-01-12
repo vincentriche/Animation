@@ -56,13 +56,21 @@ void SolveurExpl::CalculAccel_ForceGravite(Vector g,
 			Vector wind(0.0, -2.5, -4.0);
 			Force[i] = Force[i] + M[i] * g + wind;
 		}
-		if(type == "PARTICULE")
+		if (type == "PARTICULE")
 			Force[i] = Force[i] + M[i] * g;
 
-		if (M[i] > 0.0f)
-			A[i] = Force[i] / M[i];
-		else
-			A[i] = 0.0f;
+
+		if (type != "SPH")
+		{
+			if (M[i] > 0.0f)
+				A[i] = Force[i] / M[i];
+			else
+				A[i] = 0.0f;
+		}
+
+		if (type == "SPH")
+			A[i] = Force[i] + g / 6.0f;
+
 		Force[i] = 0.0f;
 	}
 }//void

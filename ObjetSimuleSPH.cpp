@@ -20,11 +20,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/** \file ObjetSimuleSPH.cpp
- \brief Methodes specifiques aux fluides avec methode SPH.
- */
+ /** \file ObjetSimuleSPH.cpp
+  \brief Methodes specifiques aux fluides avec methode SPH.
+  */
 
-/** Librairies **/
+  /** Librairies **/
 #include <stdio.h>
 #include <vector>
 #include <string.h>
@@ -52,12 +52,12 @@
  * Constructeur de la class ObjetSimuleSPH.
  */
 ObjetSimuleSPH::ObjetSimuleSPH(std::string fich_param)
-: ObjetSimule(fich_param)
+	: ObjetSimule(fich_param)
 {
 
-    /** Recuperation des parametres de la methode sph mis dans le fichier **/
-    Param_sph(fich_param);
-    
+	/** Recuperation des parametres de la methode sph mis dans le fichier **/
+	Param_sph(fich_param);
+
 }
 
 /**
@@ -65,7 +65,7 @@ ObjetSimuleSPH::ObjetSimuleSPH(std::string fich_param)
  */
 int box_indicator(float x, float y, float z)
 {
-    return (x < 0.5) && (y < 0.5) && (z < 0.5);
+	return (x < 0.5) && (y < 0.5) && (z < 0.5);
 }
 
 
@@ -74,59 +74,59 @@ int box_indicator(float x, float y, float z)
  */
 void ObjetSimuleSPH::initObjetSimule()
 {
-    /* Initialisation des etats des particules */
-    float hh = h / 1.3;
-    
-    float x, y, z;
-    
-    // Nombre de particules
-    _Nb_Sommets = 0;
-    
-    for (x = 0; x < 1; x += hh) {
-        for (y = 0; y < 1; y += hh){
-            for (z = 0; z < 1; z += hh){
-                
-                // Pour un point (x,y,z) dans la region
-                if (box_indicator(x,y,z))
-                {
-                    // Initialisation de ses donnees
-                    P.push_back(Vector(x, y, z));
-                    V.push_back(Vector(0.0,0.0,0.0));
-                    A.push_back(Vector(0.0,0.0,0.0));
-                    F.push_back(Vector(0.0,0.0,0.0));
-                    rho.push_back(0.0);
-                    M.push_back(1);
-                    
-                    // Compte les points qui tombent dans la région indiquee
-                    ++_Nb_Sommets;
-                }
-            }
-        }
-    }
-    
-    /* Calcul de la densite */
-    CalculDensite();
-    
-    /* Initialisation des masses */
-    // Calcul de la densite moyenne
-    // en considerant que toutes les particules ont une masse egale a 1
-    float rho2s = 0;
-    float rhos  = 0;
-    
-    for (int i = 0; i < _Nb_Sommets; ++i)
-    {
-        rho2s += rho[i] * rho[i];
-        rhos  += rho[i];
-    }
-    
-    // Puis repartition de cette densite sur les masses
-    for (int i = 0; i < _Nb_Sommets; ++i)
-        M[i] *= ( rho0*rhos / rho2s );
-    
-    
-    /** Message pour la fin de la creation du maillage **/
-    std::cout << "SPH build ..." << std::endl;
-    
+	/* Initialisation des etats des particules */
+	float hh = h / 1.3;
+
+	float x, y, z;
+
+	// Nombre de particules
+	_Nb_Sommets = 0;
+
+	for (x = 0; x < 1; x += hh) {
+		for (y = 0; y < 1; y += hh) {
+			for (z = 0; z < 1; z += hh) {
+
+				// Pour un point (x,y,z) dans la region
+				if (box_indicator(x, y, z))
+				{
+					// Initialisation de ses donnees
+					P.push_back(Vector(x, y, z));
+					V.push_back(Vector(0.0, 0.0, 0.0));
+					A.push_back(Vector(0.0, 0.0, 0.0));
+					F.push_back(Vector(0.0, 0.0, 0.0));
+					rho.push_back(0.0);
+					M.push_back(1);
+
+					// Compte les points qui tombent dans la région indiquee
+					++_Nb_Sommets;
+				}
+			}
+		}
+	}
+
+	/* Calcul de la densite */
+	CalculDensite();
+
+	/* Initialisation des masses */
+	// Calcul de la densite moyenne
+	// en considerant que toutes les particules ont une masse egale a 1
+	float rho2s = 0;
+	float rhos = 0;
+
+	for (int i = 0; i < _Nb_Sommets; ++i)
+	{
+		rho2s += rho[i] * rho[i];
+		rhos += rho[i];
+	}
+
+	// Puis repartition de cette densite sur les masses
+	for (int i = 0; i < _Nb_Sommets; ++i)
+		M[i] *= (rho0*rhos / rho2s);
+
+
+	/** Message pour la fin de la creation du maillage **/
+	std::cout << "SPH build ..." << std::endl;
+
 }
 
 
@@ -135,8 +135,8 @@ void ObjetSimuleSPH::initObjetSimule()
  */
 void ObjetSimuleSPH::initMeshObjet()
 {
-    // Rien car on utilise une sphere + translation par rapport aux positions P[i] des particules
-    // Pas de Mesh a creer
+	// Rien car on utilise une sphere + translation par rapport aux positions P[i] des particules
+	// Pas de Mesh a creer
 }
 
 
@@ -145,8 +145,8 @@ void ObjetSimuleSPH::initMeshObjet()
  */
 void ObjetSimuleSPH::updateVertex()
 {
-    // Rien car on utilise une sphere + translation par rapport aux positions P[i] des particules
-    // Pas de Mesh a mettre a jour
+	// Rien car on utilise une sphere + translation par rapport aux positions P[i] des particules
+	// Pas de Mesh a mettre a jour
 }
 
 
@@ -155,23 +155,24 @@ void ObjetSimuleSPH::updateVertex()
  */
 void ObjetSimuleSPH::Simulation(Vector gravite, float viscosite, int Tps)
 {
-    /* Calcul des interactions entre particules */
-    CalculInteraction(viscosite);
-    
-    /* Calcul des accelerations (avec ajout de la gravite aux forces) */
-    //std::cout << "Accel.... " << std::endl;
-    _SolveurExpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M, type);
-    
-    /* Calcul des vitesses et positions au temps t */
-    //std::cout << "Vit.... " << std::endl;
-   _SolveurExpl->Solve(viscosite, _Nb_Sommets, Tps, A, V, P);
-    
-    /* Gestion des collisions  */
-    // Reponse : rebond
-    // Penser au Translate de l objet dans la scene pour trouver plan coherent
-    //CollisionPlan();
-    
-    // Affichage des positions
-    // AffichagePos(Tps);
-    
+	/* Calcul des interactions entre particules */
+	CalculInteraction(viscosite);
+
+	/* Calcul des accelerations (avec ajout de la gravite aux forces) */
+	//std::cout << "Accel.... " << std::endl;
+	_SolveurExpl->CalculAccel_ForceGravite(gravite, _Nb_Sommets, A, F, M, type);
+
+	/* Calcul des vitesses et positions au temps t */
+	//std::cout << "Vit.... " << std::endl;
+	_SolveurExpl->Solve(viscosite, _Nb_Sommets, Tps, A, V, P);
+
+	/* Gestion des collisions  */
+	// Reponse : rebond
+	// Penser au Translate de l objet dans la scene pour trouver plan coherent
+	//CollisionPlan();
+	CollisionPlan(-10.0, 0.0, -10.0);
+
+	// Affichage des positions
+	// AffichagePos(Tps);
+
 }

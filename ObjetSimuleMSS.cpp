@@ -457,7 +457,7 @@ void ObjetSimuleMSS::Simulation(Vector gravite, float viscosite, int Tps)
 	CollisionPlan(-10.0, -10.0, -10.0);
 
 	// Collision avec une sphère
-	CollisionSphere(Point(3.5, -9.0, -1.0), 1.1);
+	CollisionSphere(Point(3.5, -8.9, -1.0), 1.1);
 
 	// Affichage des positions
 	//  AffichagePos(Tps);

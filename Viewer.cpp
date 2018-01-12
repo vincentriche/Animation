@@ -181,19 +181,33 @@ int Viewer::render()
 		}//mss
 
 		 // Cas systeme de particules non connectees
-		else if (_Simu->_type_objet[num] == "particule" || _Simu->_type_objet[num] == "sph")
+		else if (_Simu->_type_objet[num] == "particule")
 		{
 			// Affichage des particules
 			for (int i = 0; i < (*e)->_Nb_Sommets; i++)
 			{
 				// Positionnement en fonction de la position de la particule
 				gl.model(Translation(Vector((*e)->P[i])) * Scale(1.0, 1.0, 1.0));
-				
+
 				// Affichage d une sphere pour modeliser une particule
 				gl.draw(m_sphere);
 			}
 
 		}//particule
+
+		else if (_Simu->_type_objet[num] == "sph")
+		{
+			// Affichage des particules
+			for (int i = 0; i < (*e)->_Nb_Sommets; i++)
+			{
+				// Positionnement en fonction de la position de la particule
+				gl.model(Translation(Vector((*e)->P[i])) * Scale(0.018, 0.018, 0.018));
+
+				// Affichage d une sphere pour modeliser une particule
+				gl.draw(m_sphere3);
+			}
+
+		}//sph
 
 		// Cas systeme de particules non connectees
 		else if (_Simu->_type_objet[num] == "rigid")

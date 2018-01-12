@@ -38,6 +38,7 @@ class ObjetSimuleSPH : public ObjetSimule
 public:
 
 	std::string type = "SPH";
+
 	/*! Constructeur */
 	ObjetSimuleSPH(std::string fich_param);
 

@@ -144,7 +144,7 @@ void Viewer::init_cube()
 /*
  * Creation du maillage d'une sphere - centre (0, 0, 0) - rayon = r.
  */
-void Viewer::init_sphere()
+void Viewer::init_sphere1()
 {
 	const int divBeta = 26;
 	const int divAlpha = divBeta / 2;
@@ -154,7 +154,7 @@ void Viewer::init_sphere()
 
 	m_sphere = Mesh(GL_TRIANGLE_STRIP);
 
-	m_sphere.color(Color(114 / 255, 95 / 255, 106 / 255));
+	m_sphere.color(Color(114 / 255, 0 / 255, 0 / 255));
 
 	for (i = 0; i < divAlpha; ++i)
 	{
@@ -238,9 +238,10 @@ int Viewer::init()
 	init_axe();
 	init_grid();
 	init_cube();
-	init_sphere();
+	init_sphere1();
 	m_plan = read_mesh("data/plan.obj");
 	m_sphere2 = read_mesh("data/ball.obj");
+	m_sphere3 = read_mesh("data/ball.obj");
 
 	// Creation du plan (x, y, z) - plan utilise pour les ObjetSimule::CollisionPlan(x, y, z);
 	// Rq : pas vraiment le plan, mais < x, < y, < z
