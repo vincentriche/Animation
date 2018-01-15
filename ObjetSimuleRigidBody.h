@@ -91,7 +91,7 @@ public:
     // r0i : position constante de la particule i dans l objet
     // ri(t) : position dans le repere monde
     // ri(t) = R(t) r0i + x(t)
-    std::vector<Vector> _ROi;
+    std::vector<Vector> _R0i;
     
     /// Matrice de rotation R(t)
     Matrix _Rotation;

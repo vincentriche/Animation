@@ -51,6 +51,7 @@ void ObjetSimuleParticule::CollisionPlan(float x, float y, float z)
 	{
 		if (P[i].y <= (y + s) && V[i].y < v)
 			V[i] = Vector(0, -V[i].y, 0);
+
 		else if (P[i].y <= (y + s))
 		{
 			P[i] = Vector(P[i].x, y + s, P[i].z);

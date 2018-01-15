@@ -117,6 +117,8 @@ void ObjetSimuleSPH::damp_reflect(int frontiere, float barrier, int indice_part)
 	/// frontiere : indique quelle frontiere (x, y, z) du domaine est concernee
 	const float DAMP = 0.75;
 
+	if (V[indice_part](frontiere) == 0)
+		return;
 
 	float tbounce = (P[indice_part](frontiere) - barrier) / V[indice_part](frontiere);
 
@@ -124,9 +126,12 @@ void ObjetSimuleSPH::damp_reflect(int frontiere, float barrier, int indice_part)
 	P[indice_part].y = P[indice_part].y - (V[indice_part].y * (1 - DAMP) * tbounce);
 	P[indice_part].z = P[indice_part].z - (V[indice_part].z * (1 - DAMP) * tbounce);
 
-
 	P[indice_part](frontiere) = 2 * barrier - P[indice_part](frontiere);
-	V[indice_part](frontiere) = -V[indice_part](frontiere);	V[indice_part](0) = V[indice_part](0) * DAMP;	V[indice_part](1) = V[indice_part](1) * DAMP;	V[indice_part](2) = V[indice_part](2) * DAMP;
+	V[indice_part](frontiere) = -V[indice_part](frontiere);
+
+	V[indice_part].x = V[indice_part].x * DAMP;
+	V[indice_part].y = V[indice_part].y * DAMP;
+	V[indice_part].z = V[indice_part].z * DAMP;
 }
 
 /**
@@ -136,4 +141,16 @@ void ObjetSimuleSPH::damp_reflect(int frontiere, float barrier, int indice_part)
  */
 void ObjetSimuleSPH::CollisionPlan(float x, float y, float z)
 {
+	/*int size = 2.0;
+	for (int i = 0; i < V.size(); i++)
+	{
+		if (P[i].x <= (x - size) || P[i].x >= (x + size))
+			damp_reflect(0, x, i);
+
+		if (P[i].y <= (y - size) || P[i].y >= (y + size))
+			damp_reflect(1, y, i);
+
+		if (P[i].z <= (z - size))
+			damp_reflect(2, z, i);
+	}*/
 }

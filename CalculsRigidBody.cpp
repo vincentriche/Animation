@@ -62,10 +62,10 @@ void ObjetSimuleRigidBody::CalculIBody()
 	_Ibody = Matrix::NullMatrix();
 	for (int i = 0; i < P.size(); i++)
 	{
-		_ROi.push_back(P[i]);
+		_R0i.push_back(P[i]);
 
-		float r0iTr0i = (_ROi[i].x * _ROi[i].x + _ROi[i].y * _ROi[i].y + _ROi[i].z * _ROi[i].z);
-		Matrix r0ir0iT = MultiplyTransposedAndOriginal(_ROi[i]);
+		float r0iTr0i = (_R0i[i].x * _R0i[i].x + _R0i[i].y * _R0i[i].y + _R0i[i].z * _R0i[i].z);
+		Matrix r0ir0iT = MultiplyTransposedAndOriginal(_R0i[i]);
 		_Ibody = (Matrix::UnitMatrix() * r0iTr0i - r0ir0iT) * M[i];
 	}
 
@@ -99,13 +99,13 @@ void ObjetSimuleRigidBody::CalculDeriveeStateX(Vector gravite)
  */
 void ObjetSimuleRigidBody::Solve(float visco)
 {
-	_Position = _Position + _Vitesse * _delta_t;
+	_BaryCentre = _BaryCentre + _Vitesse * _delta_t;
 	_Rotation = _Rotation + _RotationDerivee * _delta_t;
 	_QuantiteMouvement = _QuantiteMouvement + _Force * _delta_t;
 	_MomentCinetique = _MomentCinetique + _Torque * _delta_t;
 
 	for (int i = 0; i < _Nb_Sommets; i++)
-		P[i] = _Rotation * _ROi[i] + _Position * visco;
+		P[i] = _Rotation * _R0i[i] + _BaryCentre * visco;
 
 }//void
 
